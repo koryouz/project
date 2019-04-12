@@ -1,0 +1,24 @@
+/* NAV BAR */
+
+.hideNav {   
+    display: none !important;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+}
+
+.borderBottom {
+    border-bottom: 2px solid black;
+    padding: 0;
+}
+
+/* BODY */
+
+
+/* FOOTER */
+
+.borderTop {
+    border-top: 2px solid black;
+    padding: 0;
+}
