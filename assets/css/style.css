@@ -5,7 +5,7 @@
 }
 
 #navbar a:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .borderBottom {
@@ -14,10 +14,19 @@
 }
 
 .form-control:focus {
-  border: 4px solid #30368c !important;
+    border: 4px solid #30368c !important;
+}
+
+.borderBottom{
+    margin-top: 16px;
+    border-bottom: 2px solid black;
 }
 
 /* BODY */
+
+.modalPosition{
+    margin-top: 12%;
+}
 
 .mainBackGroundColor {
     background-color: #273087 !important;
@@ -30,9 +39,18 @@
 }
 
 .homeRectFooter {
-        margin-bottom: -5px !important;
+    margin-bottom: -5px !important;
 }
 
+div.col-12:nth-child(2) > p:nth-child(1),
+div.container:nth-child(3) > div:nth-child(1) > div:nth-child(1),
+.mb-5 > ul:nth-child(1) > li:nth-child(1){
+    font-size: 1.1rem;
+}
+
+.sizeFormGroup{
+width: 600px !important;
+}
 
 /* FOOTER */
 
@@ -43,4 +61,48 @@
 
 .footerColor {
     background-color: #e9ecef;
+}
+
+/* GALLERY */
+
+.textinput{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;	
+    width: 100%;
+}
+
+.btn:focus, .btn:active, button:focus, button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#image-gallery .modal-footer{
+    display: block;
+}
+
+.thumb{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.modal-lg {
+    max-width: 1200px !important;
+}
+
+.borderLeft{
+    border-left: 2px solid #dee2e6;
+}
+
+div.borderBottom{
+    margin-top: 16px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.commentContentSpace{
+    margin-bottom: -10px;
+}
+
+.w-auto > form:nth-child(2) > textarea:nth-child(1){
+    resize: none;
 }

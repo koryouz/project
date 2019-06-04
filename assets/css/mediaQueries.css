@@ -1,0 +1,40 @@
+/*  MODAL REALISATION */
+
+@media screen and (max-width: 640px) {
+   div > h5 {
+   font-size: 16px !important;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  div > h5 {
+   font-size: 14px !important;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  div > h5 {
+   font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  div > h5 {
+   font-size: 10px !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .textinput{
+    box-sizing: border-box;	
+    width: 80%;
+}
+}
+
+@media screen and (max-width: 540px) {
+  .textinput{
+    box-sizing: border-box;	
+    width: 65%;
+}
+}
+

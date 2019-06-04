@@ -16,7 +16,9 @@
                     <h3 class="h2">Hébergement</h3>
                     <p>ACOMPLETER<br/>ACOMPLETER<br/>ACOMPLETER<br/>ACOMPLETER<br/></p>
                     <h4 class="h2">Gestion des cookies</h4>
-                    <p>ACOMPLETER</p>
+                    <p>
+                        <strong>delhay.fr</strong> utilise des cookies et vous donne le contrôle sur ce que vous souhaitez activer. Pour activer / désactiver les services concernés, <span id="cookiesManager">cliquez-ici</span>.
+                    </p>
                     <h5 class="h2">Protection des données personnelles</h5>
                     <p>La société <strong>Delhay Frères Sarl</strong> s’engage à respecter la règlementation générale sur la protection des données personnelles, <br /> article 2016/679 (UE) du 27 Avril 2016. <br />
                         Ce site n’a pas vocation à collecter des données personnelles mais de présenter les différentes prestations de l'entreprise. <br />
