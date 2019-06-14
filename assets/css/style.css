@@ -52,6 +52,15 @@ div.container:nth-child(3) > div:nth-child(1) > div:nth-child(1),
 width: 600px !important;
 }
 
+table, th, tr, td{
+    border: 2px black solid;
+}
+
+.img-thumbnailResize{
+    height: 16rem !important;
+}
+
+
 /* FOOTER */
 
 .borderTop {
@@ -61,6 +70,14 @@ width: 600px !important;
 
 .footerColor {
     background-color: #e9ecef;
+}
+
+  input:hover {
+  background-color: #FFF;
+  border: 2px solid #273087;
+  color: #273087;
+  border-radius: 3px;
+  transition: 1.4s;
 }
 
 /* GALLERY */

@@ -20,12 +20,16 @@
             </li>
         </ul>
         <?php if (isset($_SESSION['id'])) { ?>
+        <p class="mt-3 font-weight-bold text-uppercase"><?= $_SESSION['lastname'] . ' ' . $_SESSION['firstname'] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| ' ?></p>
         <div class="dropdown">
             <button class="nav-link ml-4 btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cog fa-2x mt-1 mainColor"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/myAccount.php">Mon compte</a>
+                <?php if ($_SESSION['id_mkiu2_userGroup'] == 1) { ?>
+                <a class="dropdown-item" href="/admin.php">Administration</a>
+                <?php }  ?>
                 <a class="dropdown-item" href="controller/logoutCtrl.php">Se déconnecter</a>
             </div>
         </div>

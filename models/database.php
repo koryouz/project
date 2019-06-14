@@ -11,7 +11,7 @@ class database {
     public function __construct() {
         //Je me connecte à ma base de donnée comme d'habitude
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'admin', 'admin');
+            $this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'delhay', 'admin');
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }

@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 require_once 'models/user.php';
 //On inclut le fichier qui contient les regex avec un require car on en a besoin pour faire les vérification
 require_once 'regex.php';
@@ -10,6 +9,13 @@ $user = new user();
 if (!empty($_SESSION['id'])) {
     if (preg_match($regexId, $_SESSION['id'])) {
         $user->id = htmlspecialchars($_SESSION['id']);
+    }
+    
+    if (isset($_POST['delete'])){
+        $user->deleteUser();
+        header('Location: /login.php');
+        session_destroy();
+        exit;
     }
 
     if (count($_POST) > 0) {
@@ -50,29 +56,31 @@ if (!empty($_SESSION['id'])) {
             $formErrors['mail'] = 'Veuillez renseigner votre mail';
         }
         if (!empty($_POST['passwordInput'])) {
-            if (preg_match($regexPassword, $_POST['passwordInput'])) {
-                $user->passwordInput = htmlspecialchars($_POST['passwordInput']);
+            if (preg_match($regexMaxCharact, $_POST['passwordInput'])) {
+                if (preg_match($regexPassword, $_POST['passwordInput'])) {
+                    $user->passwordInput = password_hash($_POST['passwordInput'], PASSWORD_DEFAULT);
+                } else {
+                    $formErrors['password'] = 'La forme de votre mot de passe est invalide';
+                }
             } else {
-                $formErrors['password'] = 'La forme de votre mot de passe est invalide';
+                $formErrors['passwordInput'] = 'Merci de renseigner un mot de passe entre 4 et 16 charactères';
             }
         } else {
             $formErrors['password'] = 'Veuillez renseigner votre mot de passe';
         }
 
 
-        if (count($formErrors) == 0) {
+        if (count($formErrors) == 0 && isset($_POST['submit'])) {
             $user->modifyUser();
             $userInfo = $user->getUserByMail();
             $_SESSION['id'] = $userInfo->id;
             $_SESSION['lastname'] = $userInfo->lastname;
             $_SESSION['firstname'] = $userInfo->firstname;
-            $_SESSION['mail'] = $userInfo->mail;
-            $_SESSION['passwordInput'] = $userInfo->passwordInput;
-            $_SESSION['phoneNumber'] = $userInfo->phoneNumber;
-            $_SESSION['address'] = $userInfo->address;
-            $_SESSION['nationality'] = $userInfo->nationality;
+            $_SESSION['id_mkiu2_userGroup'] = $userInfo->id_mkiu2_userGroup;
         }
     }
     $selectUser = $user->showSelectUser();
+}else{
+    header('Location: /login.php');
 }
 ?>

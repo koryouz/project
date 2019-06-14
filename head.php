@@ -1,5 +1,4 @@
 <?php
-var_dump($_SESSION);
 switch ($_SERVER['PHP_SELF']) {
     case '/contact.php':
         $pageTitle = 'Contact';
@@ -24,6 +23,15 @@ switch ($_SERVER['PHP_SELF']) {
         break;
     case '/myAccount.php':
         $pageTitle = 'Mon compte';
+        break;
+    case '/admin.php':
+        $pageTitle = 'Administration';
+        break;
+    case '/profil-user.php':
+        $pageTitle = 'Profil Utilisateur';
+        break;
+    case '/profil-content.php':
+        $pageTitle = 'Profil Contenu';
         break;
 }
 ?>

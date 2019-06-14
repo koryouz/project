@@ -24,7 +24,7 @@ require_once 'controller/logInCtrl.php';
                         <p class="text-center">Inscription réussi</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@ require_once 'controller/logInCtrl.php';
                                         <div class="form-group row">
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <label for="nationality">Nationalité</label>
-                                                <input type="text" required name="nationality"  value="<?= isset($_POST['nationality']) ? $_POST['nationality'] : '' ?>"class="form-control <?= isset($formErrors['nationality']) ? 'is-invalid' : (isset($nationality) ? 'is-valid' : '') ?>" id="nationality" placeholder="Français" />
+                                                 <?php include 'selected.php' ?>
                                                 <?php if (isset($formErrors['nationality'])) { ?>
                                                     <div class="invalid-feedback"><?= $formErrors['nationality'] ?></div>
                                                 <?php } ?>
@@ -122,12 +122,7 @@ require_once 'controller/logInCtrl.php';
                                     <input type="submit" class="btn btn-primary mainBackGroundColor" name="formType" value="Sign in" />
                                 </div>
                             </div>
-                            <?php
-                        } elseif (count($_POST) == 8) {
-                            $_SESSION["check"] = 1;
-                            ?><script>document.location.href = "login.php"</script><?php
-                        }
-                        ?>
+                        <?php } ?>
                     </form>
                 </div>
                 <?php if (count($_POST) == 0 || count($formErrors) > 0) { ?>
@@ -159,12 +154,7 @@ require_once 'controller/logInCtrl.php';
                             </div>
                         </form> 
                     </div>
-                    <?php
-                } elseif (count($_POST) == 2) {
-                    $_SESSION["check"] = 2;
-                    ?><script>document.location.href = "index.php"</script><?php
-                }
-                ?>
+                <?php } ?>
             </div>
         </div>
         <?php include 'footer.php' ?>   

@@ -8,6 +8,7 @@
     <body>
         <?php include 'navbar.php' ?>
         <?php include 'loadModal.php' ?>
+        
         <!--MODAL LOG-IN-->
 
         <div class="modal fade modalPosition" id="myModal" role="dialog">

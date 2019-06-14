@@ -1,92 +1,29 @@
-let modalId = $('#image-gallery');
-
 $(function () {
+    //Fonction qui permet de déclencher les actions que l'on souhaite à l'affichage de la modale
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        //On stocke dans une variable le bouton qui appelle la modale.
+        var button = $(event.relatedTarget);
+        //On récupère les attributs data- du bouton qui a appelé la modale. On récupère donc l'id du user, son nom de famille et son prénom
+        var userId = button.data('id');
+        var userLastname = button.data('lastname');
+        var userFirstname = button.data('firstname');
+        var modal = $(this);
+        /*
+         * La fonction find trouve un élément dont l'id ou (ici) la classe est passée en paramètre.
+         * La fonction append permet de créer un élément dans l'élément apposé devant.
+         * Ici dans la div modal-body, on crée un paragraphe qui contient la question de confirmation.
+         */
+        modal.find('.modal-body').empty().append('<p>Êtes-vous sûre de vouloir supprimer ' + userLastname + ' ' + userFirstname + ' ?</p>');
+        modal.find('.modal-footer').empty().append('<a href="admin.php?deleteId=' + userId + '" class="btn btn-danger">Supprimer cette utilisateur</a>');
+    });
 
-    loadGallery(true, 'a.thumbnail');
+    $('#deleteModalContent').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var contentId = button.data('id');
+        var title = button.data('title');
+        var modal = $(this);
 
-    //This function disables buttons when needed
-    function disableButtons(counter_max, counter_current) {
-        $('#show-previous-image, #show-next-image')
-                .show();
-        if (counter_max === counter_current) {
-            $('#show-next-image')
-                    .hide();
-        } else if (counter_current === 1) {
-            $('#show-previous-image')
-                    .hide();
-        }
-    }
-
-    /**
-     *
-     * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
-     * @param setClickAttr  Sets the attribute for the click handler.
-     */
-
-    function loadGallery(setIDs, setClickAttr) {
-        let current_image,
-                selector,
-                counter = 0;
-
-        $('#show-next-image, #show-previous-image')
-                .click(function () {
-                    if ($(this)
-                            .attr('id') === 'show-previous-image') {
-                        current_image--;
-                    } else {
-                        current_image++;
-                    }
-
-                    selector = $('[data-image-id="' + current_image + '"]');
-                    updateGallery(selector);
-                });
-
-        function updateGallery(selector) {
-            let $sel = selector;
-            current_image = $sel.data('image-id');
-            $('#image-gallery-title')
-                    .text($sel.data('title'));
-            $('#image-gallery-image')
-                    .attr('src', $sel.data('image'));
-            disableButtons(counter, $sel.data('image-id'));
-        }
-
-        if (setIDs == true) {
-            $('[data-image-id]')
-                    .each(function () {
-                        counter++;
-                        $(this)
-                                .attr('data-image-id', counter);
-                    });
-        }
-        $(setClickAttr)
-                .on('click', function () {
-                    updateGallery($(this));
-                });
-    }
+        modal.find('.modal-body').empty().append('<p>Êtes-vous sûre de vouloir supprimer le contenu ayant pour titre ' + title + '.' + ' ?</p>');
+        modal.find('.modal-footer').empty().append('<a href="admin.php?deleteId=' + contentId + '" class="btn btn-danger">Supprimer ce contenu</a>');
+    });
 });
-
-// build key actions
-$(document)
-        .keydown(function (e) {
-            switch (e.which) {
-                case 37: // left
-                    if ((modalId.data('bs.modal') || {})._isShown && $('#show-previous-image').is(":visible")) {
-                        $('#show-previous-image')
-                                .click();
-                    }
-                    break;
-
-                case 39: // right
-                    if ((modalId.data('bs.modal') || {})._isShown && $('#show-next-image').is(":visible")) {
-                        $('#show-next-image')
-                                .click();
-                    }
-                    break;
-
-                default:
-                    return; // exit this handler for other keys
-            }
-            e.preventDefault(); // prevent the default action (scroll / move caret)
-        });
-

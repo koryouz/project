@@ -4,8 +4,7 @@ require_once 'models/user.php';
 require_once 'regex.php';
 
 // INSCRIPTION
-// 
-// 
+
 //On initialise un tableau d'erreurs vide
 $formErrors = array();
 /*
@@ -14,7 +13,7 @@ $formErrors = array();
  * S'il a au moins une ligne => le formulaire a été envoyé, on peut commencer les vérifications
  */
 if (count($_POST) > 0) {
-$user = new user();
+    $user = new user();
     if (isset($_POST['formType'])) {
         /*
          * On vérifie que $_POST['lastname'] n'est pas vide
@@ -78,10 +77,10 @@ $user = new user();
                     $formErrors['mail'] = 'Un compte avec ce mail existe déjà';
                 }
             } else {
-                $formErrors['mail'] = 'Merci de renseigner une nationalité valide';
+                $formErrors['mail'] = 'Merci de renseigner un mail valide';
             }
         } else {
-            $formErrors['mail'] = 'Merci de renseigner votre nationalité';
+            $formErrors['mail'] = 'Merci de renseigner votre mail';
         }
 
         if (!empty($_POST['phoneNumber'])) {
@@ -109,11 +108,14 @@ $user = new user();
         }
         if (count($formErrors) == 0) {
             $user->addUser();
+                $_SESSION['check'] = 1;
+                header('location:login.php');
+                exit;  
         }
     } else {
-        
+
         // LOG-IN
-        
+
         if (!empty($_POST['mailLog'])) {
             if (preg_match($regexMail, $_POST['mailLog'])) {
                 $user->mail = htmlspecialchars($_POST['mailLog']);
@@ -145,11 +147,11 @@ $user = new user();
                     $_SESSION['id'] = $userInfo->id;
                     $_SESSION['lastname'] = $userInfo->lastname;
                     $_SESSION['firstname'] = $userInfo->firstname;
-                    $_SESSION['mail'] = $userInfo->mail;
                     $_SESSION['passwordInput'] = $userInfo->passwordInput;
-                    $_SESSION['phoneNumber'] = $userInfo->phoneNumber;
-                    $_SESSION['address'] = $userInfo->address;
-                    $_SESSION['nationality'] = $userInfo->nationality;
+                    $_SESSION['id_mkiu2_userGroup'] = $userInfo->id_mkiu2_userGroup;
+                    $_SESSION['check'] = 2;
+                    header('location:index.php');
+                    exit;
                 } else {
                     $formErrors['passwordLog'] = 'L\'email et/ou le mot de passe est invalide';
                 }
