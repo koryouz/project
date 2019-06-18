@@ -1,19 +1,22 @@
 <?php
 require_once 'models/user.php';
 require_once 'models/content.php';
+require_once 'models/comment.php';
 //On inclut le fichier qui contient les regex avec un require car on en a besoin pour faire les vérification
 require_once 'regex.php';
 $formErrors = array();
 
 $user = new user();
 $content = new content();
+$comment = new comment(); 
 // REDIRECTION SI L'UTILISATEUR N'EST PAS ADMIN
 if ($_SESSION['id_mkiu2_userGroup'] == 2) {
     header('location:index.php');
 }
 
-$userList = $user->getUsersList();
 $contentList = $content->getContentList();
+$commentList = $comment->getAllContentList();
+$userList = $user->getUsersList();
 
 //GESTION DES COMPTES
 
@@ -32,6 +35,7 @@ if (!empty($_GET['deleteId'])) {
         //Je peux réutiliser mon objet patient ou en créer un nouveau, ici pas de problème pour la réutilisation.
         $user->id = $_GET['deleteId'];
         $content->id = $_GET['deleteId'];
+        $comment->id = $_GET['deleteId'];
         /*
          * Je crée des variables qui me permettront d'indiquer que le patient a été supprimé ou que le patient n'a pas été supprimé
          * L'utilisateur de mon application ne doute pas : il sait que l'action qu'il fait a bien été faite ou qu'elle n'a pas été faite
@@ -45,15 +49,20 @@ if (!empty($_GET['deleteId'])) {
         }
         if ($content->deleteContent()) {
             $deleteSuccess = 'Le contenu a été supprimé';
+            $contentList = $content->getContentList();
         } else {
             $deleteError = 'Le contenu n\'a pas été supprimé';
+        }
+         if ($comment->deleteComment()) {
+            $deleteSuccess = 'Le commentaire a été supprimé';
+            $commentList = $comment->getAllContentList();
+        } else {
+            $deleteError = 'Le commentaire n\'a pas été supprimé';
         }
     }
 }
 
 //GESTION DES ARTICLES ET REALISATIONS
-
-
 
 if (count($_POST) > 0) {
     if (isset($_POST['formType'])) {

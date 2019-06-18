@@ -26,4 +26,14 @@ $(function () {
         modal.find('.modal-body').empty().append('<p>Êtes-vous sûre de vouloir supprimer le contenu ayant pour titre ' + title + '.' + ' ?</p>');
         modal.find('.modal-footer').empty().append('<a href="admin.php?deleteId=' + contentId + '" class="btn btn-danger">Supprimer ce contenu</a>');
     });
+    
+        $('#deleteModalComment').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var contentId = button.data('id');
+        var content = button.data('content');
+        var modal = $(this);
+
+        modal.find('.modal-body').empty().append('<p>Êtes-vous sûre de vouloir supprimer le contenu ayant pour contenu : ' + content + '.' + ' ?</p>');
+        modal.find('.modal-footer').empty().append('<a href="admin.php?deleteId=' + contentId + '" class="btn btn-danger">Supprimer ce contenu</a>');
+    });
 });

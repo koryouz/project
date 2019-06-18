@@ -13,7 +13,10 @@ $contentRealisationList = $content->getContentRealisationList();
 // AFFICHAGE DES COMMENTAIRES
 
 $comment = new comment();
-$commentList = $comment->getCommentList();
+if (!empty($_POST['idThumb'])) {
+    $comment->id_mkiu2_content = 18;
+    $commentList = $comment->getCommentList();
+}
 
 
 // AJOUT DES COMMENTAIRES
@@ -46,6 +49,7 @@ if (count($_POST) > 0) {
         $comment->id_mkiu2_typeOfComment = 1;
         $comment->id_mkiu2_user = $_SESSION['id'];
         $comment->addComment();
+        $commentList = $comment->getCommentList();
     }
 }
 ?>

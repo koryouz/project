@@ -1,5 +1,4 @@
 <?php
-
 require_once 'models/database.php';
 
 class content extends database {
@@ -30,7 +29,7 @@ class content extends database {
        public function getContentArticleList() {
         $query = 'SELECT `id`, `title`, `date`, `image`, `content`, `id_mkiu2_typeOfContent`'
                 . 'FROM `mkiu2_content`'
-                . 'WHERE `id_mkiu2_typeOfContent` = 2';
+                . 'WHERE `id_mkiu2_typeOfContent` = 1';
         $queryExecute = $this->db->query($query);
         return $queryExecute->fetchAll(PDO::FETCH_OBJ);
     }
@@ -38,7 +37,7 @@ class content extends database {
     public function getContentRealisationList() {
         $query = 'SELECT `id`, `title`, `date`, `image`, `content`, `id_mkiu2_typeOfContent`'
                 . 'FROM `mkiu2_content`'
-                . 'WHERE `id_mkiu2_typeOfContent` = 1';
+                . 'WHERE `id_mkiu2_typeOfContent` = 2';
         $queryExecute = $this->db->query($query);
         return $queryExecute->fetchAll(PDO::FETCH_OBJ);
     }

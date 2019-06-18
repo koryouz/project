@@ -11,15 +11,15 @@ require_once 'controller/adminCtrl.php';
         <?php include 'navbar.php' ?>
         <div class="container">
             <div class="row">
-                <div class="col-6  col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <h3 class="pb-2 mt-5">Tous les comptes</h3>
                 </div>
-                <div class="col-6  col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <h3 class="pb-2 mt-5">Toutes les réalisations et articles</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6  mt-2 p-4 pl-0">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6  mt-2 p-4 pl-0">
                     <form action="admin.php" method="GET">
                         <table>
                             <tr>
@@ -40,7 +40,6 @@ require_once 'controller/adminCtrl.php';
                                 </tr>
                             <?php } ?>
                         </table>       
-
                         <!--  DELETE MODAL USER-->
                         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -58,7 +57,7 @@ require_once 'controller/adminCtrl.php';
                         </div>
                     </form>
                 </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6  mt-2 p-4 pl-0">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6  mt-2 p-4 pl-0">
                     <form action="admin.php" method="GET">
                         <table>
                             <tr>
@@ -79,8 +78,7 @@ require_once 'controller/adminCtrl.php';
                                     </td>
                                 </tr>
                             <?php } ?>
-                        </table>    
-
+                        </table>  
                         <!--  DELETE MODAL CONTENT-->
                         <div class="modal fade" id="deleteModalContent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -100,7 +98,49 @@ require_once 'controller/adminCtrl.php';
                     </form>
                 </div>
             </div><hr/>
-            <form  action="admin.php" method="POST" id="add" enctype="multipart/form-data">            
+            <div class="row">
+                <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+                    <h3 class="pb-2">Tous les commentaires</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6  col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <form action="admin.php" method="GET">
+                        <table>
+                            <tr>
+                                <th class="pb-2 pr-2 pl-2 text-center">Date</th>
+                                <th class="pb-2 pr-2 pl-2 text-center">Contenu</th>
+                                <th class="pb-2 pr-2 pl-2 text-center">Action</th>
+                            </tr>
+                            <?php foreach ($commentList as $comment) { ?>
+                                <tr>
+                                    <td class="pb-2 pr-2 pl-2"><?= $comment->date ?></td>
+                                    <td class="pb-2 pr-2 pl-2"><?= $comment->content ?></td>
+                                    <td align="center">
+                                        <i data-toggle="modal" data-target="#deleteModalComment" data-id="<?= $comment->id ?>" data-content="<?= $comment->content ?>" class="fas fa-trash text-primary"></i></td>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </table>    
+                        <!--  DELETE MODAL CONTENT-->
+                        <div class="modal fade" id="deleteModalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body"></div>
+                                    <div class="modal-footer"></div>
+                                </div>
+                            </div>
+                        </div>                
+                    </form>
+                </div>
+            </div><hr/>
+            <form  action="admin.php" method="POST" enctype="multipart/form-data">            
                 <h3 class="pb-2">Création d'articles et de réalisations</h3>
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -134,7 +174,7 @@ require_once 'controller/adminCtrl.php';
                             <div class="invalid-feedback"><?= $formErrors['content'] ?></div>
                         <?php } ?>
                     </div>
-                    <input type="submit" class="btn btn-primary mainBackGroundColor d-flex ml-auto mt-2 mb-4 mr-3" name="formType" value="Créer" />
+                    <input type="submit" class="btn btn-primary mainBackGroundColor d-flex ml-auto mt-2 mb-4 mr-3" name="formType" value="Créer"/>
                 </div>
             </form>
         </div>

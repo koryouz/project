@@ -8,7 +8,7 @@ class comment extends database {
     public $date = '';
     public $content = '';
     public $id_mkiu2_user = 0;
-    public $id_mkiu2_content = 0;
+    public $id_mkiu2_content = '';
     public $id_mkiu2_typeOfComment = 0;
 
     public function __construct() {
@@ -27,13 +27,32 @@ class comment extends database {
     }
 
     public function getCommentList() {
-        $query = 'SELECT `date`, `content`'
+            $query = 'SELECT  `mkiu2_comments`.`date`,`mkiu2_comments`.`content` '
+                    . 'FROM `mkiu2_comments` '
+                    . 'LEFT JOIN `mkiu2_content` '
+                    . 'ON `mkiu2_comments`.`id_mkiu2_content` = `mkiu2_content`.`id` '
+                    . 'WHERE `mkiu2_content`.`id` = `:id_mkiu2_content`';
+        $queryExecute = $this->db->prepare($query);
+        $queryExecute->bindValue(':id_mkiu2_content', $this->id_mkiu2_content, PDO::PARAM_INT);
+        $queryExecute->execute();
+        return $queryExecute->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+           public function getAllContentList() {
+        $query = 'SELECT `id`, `date`, `content` '
                 . 'FROM `mkiu2_comments`';
         $queryExecute = $this->db->query($query);
         return $queryExecute->fetchAll(PDO::FETCH_OBJ);
     }
-
-
+    
+       public function deleteComment() {
+        $query = 'DELETE FROM `mkiu2_comments` '
+                . 'WHERE `id` = :id';
+        $queryExecute = $this->db->prepare($query);
+        $queryExecute->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryExecute->execute();
+    }
+    
     public function __destruct() {
         $this->db = NULL;
     }

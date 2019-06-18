@@ -85,7 +85,6 @@ require_once 'controller/myAccountCtrl.php';
                             </div>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>
