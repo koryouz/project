@@ -1,10 +1,11 @@
 <?php
+
+// On inclut le model utilisé, ici c'est l'utilisateur.
 require_once 'models/user.php';
 //On inclut le fichier qui contient les regex avec un require car on en a besoin pour faire les vérification
 require_once 'regex.php';
 
 // INSCRIPTION
-
 //On initialise un tableau d'erreurs vide
 $formErrors = array();
 /*
@@ -13,7 +14,9 @@ $formErrors = array();
  * S'il a au moins une ligne => le formulaire a été envoyé, on peut commencer les vérifications
  */
 if (count($_POST) > 0) {
+//On instancie un objet.
     $user = new user();
+// On vérifie quel formulaire est utilisé puisqu'il y a deux formulaire dans cette page, et il peut y avoir conflit.
     if (isset($_POST['formType'])) {
         /*
          * On vérifie que $_POST['lastname'] n'est pas vide
@@ -108,9 +111,9 @@ if (count($_POST) > 0) {
         }
         if (count($formErrors) == 0) {
             $user->addUser();
-                $_SESSION['check'] = 1;
-                header('location:login.php');
-                exit;  
+            $_SESSION['check'] = 1;
+            header('location:login.php');
+            exit;
         }
     } else {
 
@@ -147,7 +150,6 @@ if (count($_POST) > 0) {
                     $_SESSION['id'] = $userInfo->id;
                     $_SESSION['lastname'] = $userInfo->lastname;
                     $_SESSION['firstname'] = $userInfo->firstname;
-                    $_SESSION['passwordInput'] = $userInfo->passwordInput;
                     $_SESSION['id_mkiu2_userGroup'] = $userInfo->id_mkiu2_userGroup;
                     $_SESSION['check'] = 2;
                     header('location:index.php');

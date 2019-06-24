@@ -31,10 +31,10 @@ require_once 'controller/adminCtrl.php';
                             </tr>
                             <?php foreach ($userList as $user) { ?>
                                 <tr>
-                                    <td class="pb-2 pr-2 pl-2"><?= $user->lastname ?></td>
-                                    <td class="pb-2 pr-2 pl-2"><?= $user->firstname ?></td>
-                                    <td class="pb-2 pr-2 pl-2"><?= $user->phoneNumber ?></td>
-                                    <td class="pb-2 pr-2 pl-2"><?= $user->mail ?></td>
+                                    <td class="pb-3 pr-2 pl-2 pt-3"><?= $user->lastname ?></td>
+                                    <td class="pb-3 pr-2 pl-2 pt-3"><?= $user->firstname ?></td>
+                                    <td class="pb-3 pr-2 pl-2 pt-3"><?= $user->phoneNumber ?></td>
+                                    <td class="pb-3 pr-2 pl-2 pt-3"><?= $user->mail ?></td>
                                     <td class="pl-2 pr-2"><a href="profil-user.php?&id=<?= $user->id ?>"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <i data-toggle="modal" data-target="#deleteModal" data-id="<?= $user->id ?>" data-lastname="<?= $user->lastname ?>" data-firstname="<?= $user->firstname ?>" class="fas fa-trash text-primary"></i></td>
                                 </tr>
@@ -147,7 +147,7 @@ require_once 'controller/adminCtrl.php';
                         <label for="file">Image </label>
                         <input class="form-control" type="file" name="file" id="file" />
                         <?php if (isset($formErrors['file'])) { ?>
-                            <div class="invalid-feedback"><?= $formErrors['file'] ?></div>
+                            <div class="invalid-feedback d-block"><?= $formErrors['file'] ?></div>
                         <?php } ?>
                     </div>
                     <div class="col-6  col-sm-6 col-md-6 col-lg-6 col-xl-6">

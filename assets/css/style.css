@@ -56,8 +56,19 @@ table, th, tr, td{
     border: 2px black solid;
 }
 
-.img-thumbnailResize{
+.img-thumbnailRealisationResize{
     height: 16rem !important;
+    width:  16rem !important;
+}
+
+.img-thumbnailArticlesResize{
+    height: 40rem !important;
+     width: 36rem !important;
+}
+
+.img-Resize{
+    max-height: 42rem !important;
+    width:  100% !important;
 }
 
 

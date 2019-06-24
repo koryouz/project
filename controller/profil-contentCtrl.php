@@ -7,11 +7,13 @@ $formErrors = array();
 
 $content = new content();
 
+// Récupération de l'ID du contenu en question par l'URL -> GET
 if (!empty($_GET['id'])) {
     if (preg_match($regexId, $_GET['id'])) {
         $content->id = $_GET['id'];
     }
 
+    // VERIFICATION POUR LA MODIFICATION
     if (count($_POST) > 0) {
         if (!empty($_POST['title'])) {
             if (preg_match($regexObjectMessage, $_POST['title'])) {
@@ -43,10 +45,13 @@ if (!empty($_GET['id'])) {
         } else {
             $formErrors['type'] = 'Veuillez renseigner votre type';
         }
+        
+        // PAS D'ERREUR DONC MODIFCATION
         if (count($formErrors) == 0 && isset($_POST['submit'])) {
             $content->modifyContent();
         }
     }
+    //SI l'ID est valide je montre le contenu grâce à la méthod showSelectContent
     $selectContent = $content->showSelectContent();
 } else {
     header('Location: /admin.php');

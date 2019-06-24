@@ -19,21 +19,16 @@ require_once 'controller/contentRealisationCtrl.php';
             <div class="row mt-4">
                 <?php foreach ($contentRealisationList as $content) { ?>
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb"> 
-
-                        <form action="#thumbForm" method="POST">
-                            <button  id="thumbForm" class="thumbnail btn btn-light" type="submit" name="idThumb" value="<?= $content->id ?>"> 
-                                <img  class="img-thumbnail img-thumbnailResize" src="<?= $content->image; ?>"/>
-                            </button>  
-                            <a class="thumbnail" data-toggle="modal" data-target="#image-gallery<?= $content->id; ?>" >modal<a/>
-                        </form>
-
+                            <a class="thumbnail" href="#" data-toggle="modal" data-target="#image-gallery<?= $content->id; ?>">
+                                <img  class="img-thumbnail img-thumbnailRealisationResize" src="<?= $content->image; ?>"/>
+                            </a>
                     </div>
                     <!--  MODAL -->
                     <div class="modal fade" id="image-gallery<?= $content->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" ><?= $content->title; ?><?= $content->id; ?></h4>
+                                    <h4 class="modal-title" ><?= $content->title; ?> <?= $content->id; ?>#</h4>
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
                                     </button>
                                 </div>
@@ -41,7 +36,7 @@ require_once 'controller/contentRealisationCtrl.php';
                                     <div class="row">
                                         <div class="col-12  col-sm-12 col-md-12 col-lg-9 col-xl-9 pr-0 pl-0">
                                             <div class="modal-body">
-                                                <img id="image-gallery-image" class="img-responsive col-md-12 pr-0 pl-0" src="<?= $content->image; ?>">
+                                                <img id="image-gallery-image" class="img-responsive col-md-12 pr-0 pl-0 img-Resize" src="<?= $content->image; ?>">
                                             </div>
                                         </div>
                                         <div class="col-12  col-sm-12 col-md-12 col-lg-3 col-xl-3 p-0 pr-3 borderLeft">
@@ -56,10 +51,10 @@ require_once 'controller/contentRealisationCtrl.php';
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                                <p class="text-right"><small>le <?= $comment->date ?> par Jacquie</small></p>
-                                                            </div>  
+                                                                <p class="text-right mb-0"><small>le <?= $comment->date ?> par Jacquie</small></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </div><hr/>
                                                 <?php } ?>
                                                 <form action="" method="POST">
                                                     <textarea  name="content" id="content" class="textinput" rows="2" placeholder="Laisse un commentaire"></textarea>

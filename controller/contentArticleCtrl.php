@@ -12,10 +12,9 @@ $contentArticleList = $content->getContentArticleList();
 
 // AFFICHAGE DES COMMENTAIRES
 
-if (isset($_POST['toggleModal'])) {
-    $comment = new comment();
-    $commentList = $comment->getCommentList();
-}
+$comment = new comment();
+$commentList = $comment->getCommentArticleList();
+
 
 // AJOUT DES COMMENTAIRES
 
@@ -41,6 +40,7 @@ if (count($_POST) > 0) {
         } else {
             $formErrors['content'] = 'Merci de renseigner votre commentaire';
         }
+        // idCard est un input caché que je me sert pour faire passer le contenu
         if (!empty($_POST['idCard'])) {
             $comment->id_mkiu2_content = htmlspecialchars($_POST['idCard']);
         }
@@ -49,6 +49,7 @@ if (count($_POST) > 0) {
             $comment->id_mkiu2_typeOfComment = 2;
             $comment->id_mkiu2_user = $_SESSION['id'];
             $comment->addComment();
+            $commentList = $comment->getCommentArticleList();
         }
     }
 }

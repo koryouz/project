@@ -12,18 +12,18 @@ require_once 'controller/contentArticleCtrl.php';
         <div class="container">          
             <div class="row">
                 <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-5">
-                    Voici quelques articles réalisés pour notre entreprise. Ils rendent compte de la qualité des aménagements intérieurs et extérieurs réalisés pour les bateaux de commerce et de plaisance.
-                    Notre expérience de menuiserie nous permet de proposer une gamme complète de mobiliers pour bateaux. Quelques exemples d'articles :
+                    Quelques articles réalisés pour notre entreprise. Ils traitent des techniques et méthodes de travail de la menuiserie <strong>Delhay Frères Sarl</strong> .
+                    Les versions complètes sont disponible sur le site <a href="http://www.fluvialnet.com/">http://www.fluvialnet.com/</a> ou sur les revues 'fluvial' directement.
+                    Voici quelques exemples d'articles :
                 </div>
             </div>
             <div class="row mt-4">
                 <?php foreach ($contentArticleList as $content) { ?>
                     <div class="col-lg-6 col-md-6 col-xs-6 thumb">
                         <a class="thumbnail" href="#" data-toggle="modal" data-target="#image-gallery<?= $content->id; ?>">
-                            <img class="img-thumbnail" src="<?= $content->image; ?>"/>
+                            <img class="img-thumbnail img-thumbnailArticlesResize" src="<?= $content->image; ?>"/>
                         </a>
                     </div>
-
                     <!--  MODAL -->
 
                     <div class="modal fade" id="image-gallery<?= $content->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -46,16 +46,18 @@ require_once 'controller/contentArticleCtrl.php';
                                             <h5 class="pt-3 pl-2 ">Commentaires</h5>
                                             <div class="borderBottom"></div>
                                             <div class="w-auto pr-2 pl-2 pt-2">
-                                                <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                    <div class="row commentContentSpace">
-                                                        <p>commentaire ICI</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                            <p class="text-right"><small>le 20-11-1989 par Jacquie</small></p>
-                                                        </div>  
-                                                    </div>
-                                                </div>
+                                                <?php foreach ($commentList as $comment) { ?>
+                                                    <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                        <div class="row commentContentSpace">
+                                                            <p><?= $comment->content ?></p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                                <p class="text-right mb-0"><small>le <?= $comment->date ?> par Jacquie</small></p>
+                                                            </div>
+                                                        </div>
+                                                    </div><hr/>
+                                                <?php } ?>
                                                 <form action="" method="POST">
                                                     <textarea  name="content" id="content" class="textinput" rows="2" placeholder="Laisse un commentaire"></textarea>
                                                     <?php if (isset($formErrors['content'])) { ?>

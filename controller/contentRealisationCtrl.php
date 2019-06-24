@@ -12,11 +12,9 @@ $contentRealisationList = $content->getContentRealisationList();
 
 // AFFICHAGE DES COMMENTAIRES
 
-$comment = new comment();
-if (!empty($_POST['idThumb'])) {
-    $comment->id_mkiu2_content = 18;
-    $commentList = $comment->getCommentList();
-}
+$comment = new comment();   
+$commentList = $comment->getCommentRealisationList();
+
 
 
 // AJOUT DES COMMENTAIRES
@@ -43,13 +41,14 @@ if (count($_POST) > 0) {
         } else {
             $formErrors['content'] = 'Merci de renseigner votre commentaire';
         }
+        // idCard est un input caché que je me sert pour faire passer le contenu
         if (!empty($_POST['idCard'])) {
             $comment->id_mkiu2_content = htmlspecialchars($_POST['idCard']);
         }
         $comment->id_mkiu2_typeOfComment = 1;
         $comment->id_mkiu2_user = $_SESSION['id'];
         $comment->addComment();
-        $commentList = $comment->getCommentList();
+        $commentList = $comment->getCommentRealisationList();
     }
 }
 ?>

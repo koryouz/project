@@ -2,15 +2,19 @@
 require_once 'models/user.php';
 //On inclut le fichier qui contient les regex avec un require car on en a besoin pour faire les vérification
 require_once 'regex.php';
+//On inclut le fichier qui contient les regex avec un require car on en a besoin pour faire les vérification
 $formErrors = array();
-
+//On initialise un tableau d'erreurs vide
+//On instancie un objet.
 $user = new user();
 
+// Je rentre la valeur utilisateur si elle est valide par rapport au $_SESSION
 if (!empty($_SESSION['id'])) {
     if (preg_match($regexId, $_SESSION['id'])) {
         $user->id = htmlspecialchars($_SESSION['id']);
     }
     
+    // Je delete l'utilisateur si le bouton nommé delete est appuyé, je n'oublie pas de terminer  la session
     if (isset($_POST['delete'])){
         $user->deleteUser();
         header('Location: /login.php');
@@ -18,6 +22,8 @@ if (!empty($_SESSION['id'])) {
         exit;
     }
 
+    
+  // VERIFIACTION DE TOUT LES CHAMPS AVANT L'EXECUTION DE LA MODIFICATION
     if (count($_POST) > 0) {
         if (!empty($_POST['lastname'])) {
             if (preg_match($regexName, $_POST['lastname'])) {
@@ -69,7 +75,7 @@ if (!empty($_SESSION['id'])) {
             $formErrors['password'] = 'Veuillez renseigner votre mot de passe';
         }
 
-
+//TOUT LES CHAMPS SONT VERIFIES, ON PEUT PROCEDER A LA MODIFICATION
         if (count($formErrors) == 0 && isset($_POST['submit'])) {
             $user->modifyUser();
             $userInfo = $user->getUserByMail();

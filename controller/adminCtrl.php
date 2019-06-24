@@ -8,12 +8,13 @@ $formErrors = array();
 
 $user = new user();
 $content = new content();
-$comment = new comment(); 
+$comment = new comment();
+
 // REDIRECTION SI L'UTILISATEUR N'EST PAS ADMIN
 if ($_SESSION['id_mkiu2_userGroup'] == 2) {
     header('location:index.php');
 }
-
+// AFFICHAGE DES COMPTES, DES CONTENUS ET DES COMMENTAIRES
 $contentList = $content->getContentList();
 $commentList = $comment->getAllContentList();
 $userList = $user->getUsersList();
@@ -32,16 +33,10 @@ if (!empty($_GET['deleteId'])) {
      * vérifier que le patient existe dans la base de donnée avant de le supprimmer.
      */
     if (preg_match($regexId, $_GET['deleteId'])) {
-        //Je peux réutiliser mon objet patient ou en créer un nouveau, ici pas de problème pour la réutilisation.
         $user->id = $_GET['deleteId'];
         $content->id = $_GET['deleteId'];
         $comment->id = $_GET['deleteId'];
-        /*
-         * Je crée des variables qui me permettront d'indiquer que le patient a été supprimé ou que le patient n'a pas été supprimé
-         * L'utilisateur de mon application ne doute pas : il sait que l'action qu'il fait a bien été faite ou qu'elle n'a pas été faite
-         * J'utiliserai ces variables pour afficher une alerte / un message / un toast ... quelque chose de voyant pour indiquer l'état
-         * de sa demande à l'utilisateur
-         */
+        
         if ($user->deleteUser()) {
             $deleteSuccess = 'L\'utilisateur a été supprimé';
         } else {
@@ -53,7 +48,7 @@ if (!empty($_GET['deleteId'])) {
         } else {
             $deleteError = 'Le contenu n\'a pas été supprimé';
         }
-         if ($comment->deleteComment()) {
+        if ($comment->deleteComment()) {
             $deleteSuccess = 'Le commentaire a été supprimé';
             $commentList = $comment->getAllContentList();
         } else {
@@ -93,7 +88,7 @@ if (count($_POST) > 0) {
             // On stock dans $fileInfos les informations concernant le chemin du fichier.
             $fileInfos = pathinfo($_FILES['file']['name']);
             // On crée un tableau contenant les extensions autorisées.
-            $fileExtension = ['png', 'jpg'];
+            $fileExtension = ['png', 'jpg','PNG', 'JPG'];
             // On verifie si l'extension de notre fichier est dans le tableau des extension autorisées.
             if (in_array($fileInfos['extension'], $fileExtension)) {
                 //On définit le chemin vers lequel uploader le fichier
@@ -131,6 +126,7 @@ if (count($_POST) > 0) {
         if (count($formErrors) == 0) {
             $content->id_mkiu2_user = $_SESSION['id'];
             $content->addContent();
+            $contentList = $content->getContentList();
         }
     }
 }

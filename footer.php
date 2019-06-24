@@ -19,5 +19,5 @@
             </div>  
         </div>
     </div>
-    <div class="footer-copyright text-center py-3">© 2018 Copyright <a class="mr-3" href="http://delhay.fr/"> delhay.fr</a><a class="mr-3 ml-3"  href="legalMention.php">Mentions Légales</a><a class="ml-3"  href="privacyPolicy.php">Politique de confidentialité</a></div>
+    <div class="footer-copyright text-center py-3">© 2018 Copyright <a class="mr-3" href="http://projet"> delhay.fr</a><a class="mr-3 ml-3"  href="legalMention.php">Mentions Légales</a><a class="ml-3"  href="privacyPolicy.php">Politique de confidentialité</a></div>
 </footer>
